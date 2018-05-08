@@ -1,73 +1,279 @@
-# IBM TJBot
-<img src="images/tjbot.jpg" width="85%">
+# [IBM Watson Maker Workshop](https://github.com/zhix/tjbot-1) - TJBot 
 
-[IBM Watson Maker Kits](http://ibm.biz/mytjbot) are a collection of DIY open source templates to build things with [Watson](https://www.ibm.com/watson/developercloud/services-catalog.html) in a fun and easy way. [IBM TJBot](http://ibm.biz/mytjbot) is the first maker kit in the collection. You can 3D print or laser cut the robot body, then use one of our [recipes](recipes) to bring him to life!
+## Using TJBot with common-cathode tri-color LED & servo motor 
 
-In addition, you can unleash your own creativity and create new recipes that bring TJBot to life using any of the available [Watson services](https://www.ibm.com/watson/developercloud/services-catalog.html)!
+This is a 3-hour workshop designed for upper-primary and secondary school students to explore on Raspberry Pi, Watson API, JavaScript and basic electronics. By the end of the workshop, students will be able to assemble their own TJBot and get it running with Watson API, controlling tri-color LED & servo motor by speech.
 
-**TJBot only works with a Raspberry Pi.**
+#### Make sure you have the followings before you start: 
+* Monitor 
+* Keyboard 
+* Mouse
+* Power supply (5V 2A) 
+* Raspberry Pi with microSD card attached
+* VGA-HDMI Converter
+* USB Microphone 
+-------
+* Cardboard Model parts 
+-------
+* 3 Male-Female Jumper Cables
+* 4 Female-Female Jumper Cables
+* Tri-color LED 
+* Micro Servo Motor
+-------
+* Hot Glue Gun 
+* Watson Credentials (password & username)
 
-# Build TJBot
-You can make your own TJBot in a number of ways.
+### 1) [Setup] Powering up Raspberry Pi as the computer
 
-- **3d Print or Laser Cut**. If you have access to a 3D printer or laser cutter, you can print/cut TJBot yourself. Begin by downloading the [design files](https://ibmtjbot.github.io/#gettj) and firing up your printer/cutter.
-- **TJBot Full Kit**. You can order a full TJBot kit with the laser cut cardboard and all the electronics from [Sparkfun](https://www.sparkfun.com/products/14123), [Adafruit](https://www.adafruit.com/product/3462), or [Robotkingdom](http://shop.robotkingdom.com.tw/raspberry-pi/tjbot01.html).
-- **TJBot Cardboard Kit**. You can purchase the TJBot laser cut cardboard from [Texas Laser Creations](http://texlaser.com).
+1.	Get ready with the following items: 
+![alt text][assemble]
 
-## Electronics
-There are a number of components you can add to TJBot to bring him to life. Not all of these are required for all recipes.
 
-- [Raspberry Pi 3 + SD card preloaded with NOOBS](http://www.mcmelectronics.com/product/RASPBERRY-PI-RPI-MODB-16GB-NOOBS-/83-17304). **This is a required component to make TJBot work!** 🤖
-- [NeoPixel RGB LED (8mm)](https://www.adafruit.com/product/1734). Note that if you are using other kinds of LEDs, you may need to add a resistor; this LED doesn’t require one.
-- [Female-to-female jumper wires](https://www.amazon.com/dp/B00KOL5BCC/). TJBot will only need 3 of these wires, so you’ll have extra.
-- [Female-to-male jumper wires](https://www.amazon.com/dp/B00PBZMN7C/). TJBot will only need 3 of these wires, so you’ll have extra.
-- [USB Microphone](https://www.amazon.com/gp/product/B00IR8R7WQ/). Other brands of USB microphones should also work.
-- [Mini Bluetooth Speaker](https://www.amazon.com/gp/product/B00OEPCHL2/). Any small speaker with either a 3.5mm audio jack or Bluetooth will work. Note that if you are using the 3.5mm audio jack, you may wish to add a [USB Audio Adapter](https://www.adafruit.com/product/1475) to avoid audio interference with the LED.
-- [Servo Motor](https://www.amazon.com/RioRand-micro-Helicopter-Airplane-Controls/dp/B00JJZXRR0/). Note that the red (middle) wire is 5v, the brown wire is ground, and the orange wire is data.
-- [Raspberry Pi Camera](https://www.amazon.com/dp/B01ER2SKFS/). Either the 5MP or 8MP camera will work.
+2.	Hook up all the items into the correct ports on Raspberry Pi. 
+![alt text][structure]
 
-## Assembly
-Once you have obtained your TJBot, please refer to [the assembly instructions](http://www.instructables.com/id/Build-TJ-Bot-Out-of-Cardboard/) to put it all together.
 
-For reference, here is the wiring diagram to hook up the LED and servo to your Raspberry Pi.
+3.	When everything is in place, you may then turn on the Monitor and Raspberry Pi. 
 
-![](images/wiring.png)
 
-> 💡 Be careful when connecting the LED! If it is connected the wrong way, you may end up burning it out. The LED has a flat notch on one side; use this to orient the LED and figure out which pin is which.
+4.  When you see this on your screen, you are in safe hands! 
+![alt text][desktop] 
 
-> For the servo, note that the red (middle) wire is 5v, the brown wire is ground, and the orange wire is data.
+Wait for a few seconds, you will see the destop like this. 
+![alt text][desktop2] 
 
-# Bring TJBot to Life
-First, make sure you have configured your Raspberry Pi for TJBot.
-Just run that command to download and install TJBot:
+Before we move on, go to the Web Browser to access this website: www.github.com/zhix/tjbot 
+This website will be your guidance from now on. 
+
+![alt text][desktop3] 
+
+
+[assemble]: https://github.com/zhix/tjbot/blob/master/images/AssembleRPi.png  
+[structure]: https://github.com/zhix/tjbot/blob/master/images/StructureRPi.png 
+[desktop]: https://github.com/zhix/tjbot/blob/master/images/Startup.png 
+[desktop2]: https://github.com/zhix/tjbot/blob/master/images/pixelDestop.jpg 
+[desktop3]: https://github.com/zhix/tjbot/blob/master/images/desktop3.png 
+
+### 2) [Electronics] Follow the diagram to set up the electronic components 
+After completion, you now need to connect the electronics to Raspberry Pi according to this diagram. 
+![alt text][fritzing] 
+
+
+Refer to this GPIO Pinout Diagram to understand more about the General Purpose Input/Output Pins on Raspberry Pi:
+![alt text][gpio] 
+
+[fritzing]: https://github.com/zhix/tjbot/blob/master/images/TJBOT_bb.png 
+[gpio]: https://github.com/zhix/tjbot/blob/master/images/gpioPinout.jpg
+
+
+### 3) [Programming] Follow the instructions in order to get the TJBot working. 
+Once you are done, you are now working on the final and most crucial (possibly the most difficult) step. We will run the NodeJS programming on “Geany Programmer’s Editor”. 
+
+
+1. Go to Menu > Programming > Geany Programmer’s Editor 
+![alt text][geany] 
+
+You will see this on your screen. 
+![alt text][geany2] 
+
+
+2. On Terminal, change the directory to ```tjbot``` by typing the following. 
+![alt text][cdtjbot] 
+Press "enter" when done. 
+
+
+3. On Terminal, run the following. 
+```
+git init
+git fetch --all
+git reset --hard origin
+```
+If this give you error such as 
+```fatal: ambiguous argument 'origin': unknown revision or path not in the work tree```
+do this then: 
+```
+git pull
+```
+
+![alt text][gitinit] 
+
+
+4. When done,  change the directory again to ```recipes``` then ```speech_to_text``` by typing the following
+```
+cd recipes/speech_to_text/ 
+```
+![alt text][s2t] 
+
+
+5. On Geany's Code Editor, open the file "config.js" to change the password and username according the paper given. Save the file after that. 
+![alt text][configcred1] 
+![alt text][configcred2] 
+![alt text][configcred3] 
+
+
+6. Test "LEDtest.js" to see if your tricolor LED is working. 
+```bash
+sudo node LEDtest.js 
+```
+
+7. Test "MICtest.js" to see if your microphone is sending signals to IBM Watson.
+```bash
+sudo node MICtest.js 
+```
+Try to speak into the microphone, see what is printed on the Terminal. 
+![alt text][mictest] 
+
+To exit from the running program, ```CTRL + C```. 
+
+
+8. Test "SERVOtest.js" to see if your servo motor is working fine.
+```bash
+sudo node SERVOtest.js 
+```
+
+9. If all set, we will run "stt.js" to see the full effect. 
+```bash
+sudo node stt.js
+```
+To exit from the running program, ```CTRL + C```. 
+
+
+[geany]: https://github.com/zhix/tjbot/blob/master/images/geany.png 
+[geany2]: https://github.com/zhix/tjbot/blob/master/images/geany2.png 
+[cdtjbot]: https://github.com/zhix/tjbot/blob/master/images/cdtjbot.png 
+[gitinit]: https://github.com/zhix/tjbot/blob/master/images/gitinit.png 
+[s2t]: https://github.com/zhix/tjbot/blob/master/images/s2t.png 
+[configcred1]: https://github.com/zhix/tjbot/blob/master/images/configcred1.png 
+[configcred2]: https://github.com/zhix/tjbot/blob/master/images/configcred2.png 
+[configcred3]: https://github.com/zhix/tjbot/blob/master/images/configcred3.png 
+[mictest]: https://github.com/zhix/tjbot/blob/master/images/mictest.png 
+
+
+### Challenges
+
+1) Change the coding in the ```stt.js``` script to **include more colors**! 
+
+Tip: inside ```stt.js```, navigate to ```var colorPalette``` to edit. 
+
+
+2) Change the coding in the ```stt.js``` script to **add more words** that TJBot will recognise! 
+
+Tip: inside ```stt.js```, navigate to ```var colorPalette``` and ```tj.listen(function(msg)``` to add more words. 
+
+
+
+### 4) [Origami] Fold your own TJBot! 
+
+Build your own robot following the instructions [here](http://www.instructables.com/id/Build-TJ-Bot-Out-of-Cardboard/) starting from Step 3. Alternatively, you can watch the [YouTube video here](https://www.youtube.com/watch?v=bLt3Cf2Ui3o) 
+
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=bLt3Cf2Ui3o" target="_blank"><img src="https://i.ytimg.com/vi/k928MQmD0oc/hqdefault.jpg?sqp=-oaymwEXCNACELwBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLCVSTfddZpY0j1g2WF_bCXSU_4JWg" alt="YouTube Video Here" width="240" border="10" /></a> 
+
+
+
+
+## Setting up the environment
+
+Main reference: [here](https://github.com/zhix/tjbot-1/blob/master/bootstrap/README.md)
+
+1) Run the following command.
 
 ```
 curl -sL http://ibm.biz/tjbot-bootstrap | sudo sh -
 ```
 
-[Recipes](recipes) are step-by-step instructions to bring your TJBot to life with [Watson](https://www.ibm.com/watson/developercloud/services-catalog.html).
+2) Test 3.5mm jack for speaker function. Trouble-shoot on ```sudo raspi-config```
+
+3) Test the USB microphone
+
+To check the existence of the device (USB mic):
+
+```bash
+lsusb
+```
+
+After checking the device is available, make sure you reboot Raspberry Pi to make the device available on alsamixer. 
+
+On terminal, run `alsamixer`. 
+Press F6 to select Sound Card, choose the recording device `USB PnP Sound Devise` on `alsamixer`
+Press F4 to view `[Capture]` level, change to the highest using UP arrow key. 
+
+Finally, try recording: ```arecord a.wav -D sysdefault:CARD=1``` 
+
+When done, "CTRL+C" to exit. Play the recording with omxplayer by ```omxplayer a.wav```. 
+
+4) Edit the config.js file as noted in the Instructables [Step 5](http://www.instructables.com/id/Use-Your-Voice-to-Control-a-Light-With-Watson/).
+
+5) Install dependencies
+
+```
+npm install ~/Desktop/tjbot/bootstrap/tests
+```
+
+6) Running all the tests
+
+Use the `runTests.sh` script to run all of the hardware tests.
+
+```
+cd ~/Desktop/tjbot/bootstrap
+./runTests.sh
+```
+
+7) When ready, go to Recipes/Speech_To_Text and get the fun begin! 
+
+```
+cd ~/Desktop/tjbot/recipes/speech_to_text/
+sudo npm install 
+sudo node stt.js
+```
+
+To exit from the running program, ```CTRL + C```. 
+
+
+# IBM TJBot
+<img src="/images/tjbot.jpg" width="85%">
+
+[IBM Watson Maker Kits](http://ibm.biz/mytjbot) are a collection of DIY open source templates to connect to [Watson services](https://www.ibm.com/watson/developercloud/services-catalog.html) in a fun way. [IBM TJBot](http://ibm.biz/mytjbot) is the first maker kit in the collection. You can 3D print or laser cut the robot frame, then use one of the available [recipes](recipes) to bring him to life!
+
+Better still, you can create your own custom recipes to bring exciting ideas to life using any combination of Watson's Cognitive API's!
+
+**TJBot will only run on Raspberry Pi.**
+
+# Get TJBot
+You can download [the design files](https://ibmtjbot.github.io/#gettj) and 3D print or laser cut TJBot. 
+[Here is an instructable](http://www.instructables.com/id/Build-TJ-Bot-Out-of-Cardboard/) to help you with the details.
+
+# Bring TJBot to life
+[Recipes](recipes) are step by step instructions to help you connect your TJBot to [Watson services](https://www.ibm.com/watson/developercloud/services-catalog.html).
+The [recipes](recipes) are designed based on a Raspberry Pi. You can either run one of the available [recipes](recipes) or create your own recipe that brings sweet ideas to life using any combination of [Watson API](https://www.ibm.com/watson/developercloud/services-catalog.html)!
 
 We have provided three initial [recipes](recipes) for you:
+- Use your voice to control a light with Watson [[instructions](http://www.instructables.com/id/Use-Your-Voice-to-Control-a-Light-With-Watson/)] [[github](https://github.com/ibmtjbot/tjbot/tree/master/recipes/speech_to_text)]
+- Make your robot respond to emotions using Watson [[instructions](http://www.instructables.com/id/Make-Your-Robot-Respond-to-Emotions-Using-Watson/)] [[github](https://github.com/ibmtjbot/tjbot/tree/master/recipes/sentiment_analysis)]
+- Build a talking robot with Watson Conversation [[instructions](http://www.instructables.com/id/Build-a-Talking-Robot-With-Watson-and-Raspberry-Pi/)] [[github](https://github.com/ibmtjbot/tjbot/tree/master/recipes/conversation)]
 
-- Use Your Voice to Control a Light with Watson [[instructions](http://www.instructables.com/id/Use-Your-Voice-to-Control-a-Light-With-Watson/)] [[github](https://github.com/ibmtjbot/tjbot/tree/master/recipes/speech_to_text)]
-- Make Your Robot Respond to Emotions Using Watson [[instructions](http://www.instructables.com/id/Make-Your-Robot-Respond-to-Emotions-Using-Watson/)] [[github](https://github.com/ibmtjbot/tjbot/tree/master/recipes/sentiment_analysis)]
-- Build a Talking Robot with Watson [[instructions](http://www.instructables.com/id/Build-a-Talking-Robot-With-Watson-and-Raspberry-Pi/)] [[github](https://github.com/ibmtjbot/tjbot/tree/master/recipes/conversation)]
-
-After checking out our sample recipes, we encourage you to take a look at [featured recipes](featured) created by members of our community.
+Here are some of the featured recipes created by TJBot enthusiasts:
+- Fun controller recipe for TJBot's servo arm [[instructions](http://www.instructables.com/id/Build-a-Waving-Robot-Using-Watson-Services/)] [[github](https://github.com/victordibia/tjwave)]
+- SwiftyTJ that enables TJBot’s LED to be controlled from a Swift program [[github](https://github.com/jweisz/swifty-tj)]
+- Build a TJBot that cares [[instructions](https://medium.com/ibm-watson-developer-cloud/build-a-chatbot-that-cares-part-1-d1c273e17a63#.6sg1yfh4w)] [[github](https://github.com/boxcarton/tjbot-raspberrypi-nodejs)]
+- Project Intu, not a recipe but a middleware that can be installed on TJBot and be used to architect more complex interactions for your robot [[developercloud](http://www.ibm.com/watson/developercloud/project-intu.html)] [[github](https://github.com/watson-intu/self-sdk#raspberry-pi)]
 
 # Contribute to TJBot
-TJBot is an open source project designed to make it fun and easy to interact with [Watson](https://www.ibm.com/watson/developercloud/services-catalog.html). We’d love to see what you can make with him. Here are some ideas to get you started.
+TJBot is open source and we'd love to see what you can make with him. Here are some ideas to get you started.
 
-- **Visual recognition**. Make TJBot recognize your face using the [Watson Visual Recognition](https://www.ibm.com/watson/developercloud/visual-recognition.html) service and the Raspberry Pi Camera.
-- **IoT**. Let TJBot control your smart home devices using the [Watson IoT platform](https://www.ibm.com/internet-of-things/platform/watson-iot-platform/).
-- **Connected robots**. Program multiple TJBots to chat with each other!
+    - Visual recognition. TJBot has a placeholder behind his left eye to insert a Raspberry Pi camera. Try connecting the camera to the Watson Visual Recognition API so TJ can say hello when he sees you.
 
-If you would like your own recipe included in our [featured recipe](featured) list, please [send us email](mailto:tjbot@us.ibm.com) with a link to your repository and a demo video.
+    - IoT. The Watson IoT service lets you control smart home devices (e.g. Philips Hue, LIFX lights, etc. ). Connect TJBot to IoT and have him control your home.
+
+    - Connected robots. You can program multiple TJBots to send messages to each other using the Watson IoT platform.
+
+If you have created your own recipe, we would love to include it as a [featured recipe](featured/README.md)! Just submit a pull request for your receipe instructions and code and send a link to a demo video to tjbot@us.ibm.com (Vimeo & YouTube preferred). We will review it and if we decide to include it in our repository, you'll be listed as the developer. See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+We cannot wait to see what you build with [TJBot](http://ibm.biz/mytjbot)!
 
 # About TJBot
-[TJBot](http://ibm.biz/mytjbot) was affectionately named after Thomas J. Watson, the first Chairman and CEO of IBM. TJBot was created by [Maryam Ashoori](https://github.com/maryamashoori) at IBM Research as an experiment to find the best practices in the design and implementation of cognitive objects. He was born on November 9, 2016 via [this blog post](https://www.ibm.com/blogs/research/2016/11/calling-makers-meet-tj-bot/).
+[TJ](http://ibm.biz/mytjbot) is affectionately named after Thomas J. Watson, the first Chairman and CEO of IBM. TJBot was born at IBM Research as an experiment to find the best practices in the design and implementation of cognitive objects.
 
-Feel free to [contact the team](mailto:tjbot@us.ibm.com) with any questions (except technical issues). For technical issues, please create an [issue](https://github.com/ibmtjbot/tjbot/issues) instead.
+Feel free to contact TJBot at tjbot@us.ibm.com
 
-# License
-This project uses the [Apache License Version 2.0](LICENSE) software license.
+## License
+This library uses the [Apache License Version 2.0 software license] (LICENSE).
