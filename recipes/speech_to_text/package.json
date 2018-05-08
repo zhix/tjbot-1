@@ -7,6 +7,8 @@
     "url": "https://github.com/ibmtjbot/tjbot/issues"
   },
   "dependencies": {
+    "readline-sync": "^1.4.7",
+    "rpio": "latest",
     "tjbot": "latest"
   },
   "main": "stt.js",
